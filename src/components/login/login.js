@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 import {
   MDBContainer,
   MDBCol,
@@ -13,10 +16,45 @@ import {Link, withRouter} from "react-router-dom";
 import Navbar from "../../Navbar";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "./login.scss"
+import {useHistory} from "react-router-dom";
+
+
 function Login() {
+  let history = useHistory();
+  // const navigate = navigate();
+  const [values, setValues] = useState({
+    email: "",
+    pass: "",
+  });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  const handleSubmission = () => {
+    if (!values.email || !values.pass) {
+      setErrorMsg("Fill all fields");
+      return;
+    }
+    setErrorMsg("");
+
+    setSubmitButtonDisabled(true);
+    signInWithEmailAndPassword(auth, values.email, values.pass)
+      .then(async (res) => {
+        setSubmitButtonDisabled(false);
+     
+
+        history.push("/card");
+        window.location.reload(false);
+      // alert("login successfully")
+      })
+      .catch((err) => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg(err.message);
+      });
+  };
+  
   return (
-    <div class="container-md">
-    <div class="Login" style={{alignItems:'center',justifyContent:"center"}}>
+    <div className="container-md">
+    <div className="Login" style={{alignItems:'center',justifyContent:"center"}}>
       <Navbar />
     
       <MDBContainer fluid className="p-2 my-6 h-custom ">
@@ -32,10 +70,13 @@ function Login() {
           <MDBCol col="4" md="6">
             <MDBInput
               wrapperClass="mb-4"
-              label="Username"
+              label="Email"
               id="formControlLg"
               type="text"
               size="lg"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, email: event.target.value }))
+              }
             />
             <MDBInput
               wrapperClass="mb-4"
@@ -43,6 +84,9 @@ function Login() {
               id="formControlLg"
               type="password"
               size="lg"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, pass: event.target.value }))
+              }
             />
 
             <div className="d-flex justify-content-between mb-4">
@@ -54,15 +98,10 @@ function Login() {
               />
               <a href="!#">Forgot password?</a>
             </div>
-
+            < b className="primary">{errorMsg}</b>
             <div className="text-center text-md-start mt-4 pt-2">
-              <MDBBtn className="mb-0 px-5" size="lg">
-                Login
-              </MDBBtn>
-              <p className="small fw-bold mt-2 pt-1 mb-2">
-                Don't have an account?{" "}
-                <Link to="/register">Blogs</Link>
-              </p>
+            <MDBBtn   href="/card"  className='mb-4' size='lg' type="submit"  disabled={submitButtonDisabled} onClick={handleSubmission}>Login </MDBBtn>
+              or <MDBBtn href="/register" className='mb-4' size='lg' type="submit"  >register </MDBBtn>
             </div>
           </MDBCol>
         </MDBRow>

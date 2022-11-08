@@ -22,7 +22,7 @@ import LeaderBoard from './components/LeaderBoard/leaderboard';
   return (
     <MDBNavbar  fixed='top' expand='lg 'light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Employee Roster  </MDBNavbarBrand>
+        <MDBNavbarBrand href='#'>Quams  </MDBNavbarBrand>
         <MDBNavbarToggler
           aria-expanded='false'
           aria-label='Toggle navigation'

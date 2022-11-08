@@ -99,3 +99,82 @@ export default function Admin() {
     </MDBTable>
   );
 }
+
+
+
+
+// // //Calling Bootstrap 4.5 css
+// // import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+// //Calling Firebase config setting to call the data
+// import '../../firebase';
+
+
+// class Admin extends React.Component {
+
+// constructor(props) {
+    
+//     super(props);
+   
+//     this.state = {employeeslist : []}
+//     }
+    
+//   componentDidMount() {
+   
+   
+     
+//       firebase.database().ref("https://qudient-employee-default-rtdb.firebaseio.com/EmpLeaveDataRecords.json").on("value", snapshot => {
+//         let employeeslist = [];
+//         snapshot.forEach(snap => {
+//             // snap.val() is the dictionary with all your keys/values from the 'students-list' path
+//             employeesslist.push(snap.val());
+//         });
+//         this.setState({ employeeslist: employeeslist });
+//       });
+    
+    
+//  }
+  
+// //   render(){
+// //   return (
+// //     <div className="MainDiv">
+// //       <div class="jumbotron text-center bg-sky">
+// //           <h3>How to show firebase data in reactjs?</h3>
+// //       </div>
+    
+// //       <div className="container">
+// //           <table id="example" class="display table">
+// //             <thead class="thead-dark">
+// //                 <tr>
+// //                     <th>FirstName</th>
+// //                     <th>Lastname</th>
+// //                     <th>Email</th>
+// //                     <th>Mobile</th>
+// //                 </tr>
+// //             </thead>
+// //             <tbody>
+// //             {this.state.studentslist.map(data => {
+                
+// //                 return (
+// //                     <tr>     
+// //                     <td>{data.firstName}</td>
+// //                     <td>{data.lastName}</td>
+// //                     <td>{data.email}</td>
+// //                     <td>{data.mobileNumber}</td>
+// //                     </tr>
+                    
+// //                 );
+               
+// //                 })}
+        
+               
+// //             </tbody>
+            
+// //          </table>
+          
+// //      </div>
+// //     </div>
+// //   );
+// // }
+// // }
+// // export default Admin;
