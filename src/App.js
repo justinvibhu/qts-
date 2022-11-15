@@ -12,6 +12,8 @@ import { Route, Link, Switch, BrowserRouter as Router, BrowserRouter } from "rea
 import LeaderBoard from "./components/LeaderBoard/leaderboard";
 import Leave from "./components/EmployeeCard/leave";
 import { auth } from "./firebase"
+import LandingPage from "./components/LeaderBoard/LandingPage";
+import Dashboard from "./components/Admin/Dashboard";
 function App() {
 
   const [userName, setUserName] = useState("");
@@ -33,11 +35,13 @@ function App() {
     
       <Route exact path="/register" >{<Register/>}</Route>
       <Route exact path="/card" >{<Employeecard  name={userName}/>}</Route>
-     <Route exact path="/leaderboard" >{<LeaderBoard/>}</Route>
+     
       <Route exact path="/leave" >{<Leave/>}</Route>
-      <Route exact path="/dashboard" >{<Admin/>}</Route>  
+      <Route exact path="/dashboard" >{<Dashboard/>}</Route>  
       
-      <Route path="/" ><Login /></Route>
+      <Route path="/login" ><Login /></Route>
+      <Route exact path="/" >{<LandingPage/>}</Route>
+      <Route exact path="/admin" >{<Admin/>}</Route>
     </Switch>
   </Router>
   </BrowserRouter>

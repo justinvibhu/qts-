@@ -38,6 +38,7 @@ function EmployeeCard(props) {
     event.preventDefault();
     const { name, Date, Shift, Certificate, Hour } = userData;
     if ( Date && Shift && Certificate && Hour) {
+    
       const res = fetch(
         "https://qudient-employee-default-rtdb.firebaseio.com/EmpCardDataRecords.json",
         {

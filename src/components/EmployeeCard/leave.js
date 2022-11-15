@@ -1,4 +1,5 @@
 import { auth } from "../../firebase";
+import { format } from "date-fns";
 import {
   MDBBtn,
   MDBContainer,
@@ -14,14 +15,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 function Leave() {
   const [errorMsg, setErrorMsg] = useState("");
-  let history = useHistory();
+  // let history = useHistory();
   const [userData, setUserData] = useState({
-    name: "",
+    name: "vaibahv",
     EmpID: "",
     FromDate: "",
     ToDate: "",
     Reason: "",
     imag: "",
+    l:"",
+
   });
 
   let name, value;
@@ -33,41 +36,60 @@ function Leave() {
   };
   const submitData = async (event) => {
     event.preventDefault();
-    const { name, EmpID, FromDate, ToDate, Reason, imag } = userData;
-    if (name && EmpID && FromDate && ToDate && Reason) {
-      const res = fetch(
-        "https://qudient-employee-default-rtdb.firebaseio.com/EmpLeaveDataRecords.json",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            EmpID,
-            FromDate,
-            ToDate,
-            Reason,
-            imag,
-          }),
-        }
-      );
+    const { name, EmpID, FromDate, ToDate, Reason, imag,l } = userData;
 
-      if (res) {
-        alert("Data Successfully Submit ");
-        setUserData({
-          name: "",
-          EmpID: "",
-          FromDate: "",
-          ToDate: "",
-          Reason: "",
-          imag: "",
-        });
-        history.push("/card");
-        window.location.reload(false);
+    var date = new Date();
+    var current =
+      date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+    var currentMonth = date.getMonth() + 1;
+    var fromdatesplit = new Date(FromDate);
+    var fromdatecurrentMonth = fromdatesplit.getMonth() + 1;
+    console.log(fromdatecurrentMonth);
+    console.log("current month is", currentMonth);
+
+    if (FromDate > ToDate) {
+      alert("invalid date");
+    } else  {
+      if (name && EmpID && FromDate && ToDate && Reason) {
+        const res = fetch(
+          "https://qudient-employee-default-rtdb.firebaseio.com/EmpLeaveDataRecords.json",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+
+              name,
+              EmpID,
+              FromDate,
+              ToDate,
+              Reason,
+              imag,
+              
+              l:"leave",
+            }),
+          }
+        );
+
+        if (res) {
+          
+          alert("Data Successfully Submit ");
+          setUserData({
+            name: "",
+            EmpID: "",
+            FromDate: "",
+            ToDate: "",
+            Reason: "",
+            imag: "",
+      
+          });
+          // history.push("/card");
+          // window.location.reload(false);
+        }
+      } else {
+        alert("Please fill all of the Data ");
       }
-    } else {
-      alert("Please fill all of the Data ");
     }
   };
 

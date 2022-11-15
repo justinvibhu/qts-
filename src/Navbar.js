@@ -14,15 +14,27 @@ import {
 import { useParams, useRouteMatch, Switch, Route } from "react-router-dom";
 import Login from './components/login/login';
 import LeaderBoard from './components/LeaderBoard/leaderboard';
-
+import { Divider } from '@material-ui/core';
+import logo from "./logo.png";
 
  function Navbar() {
   const [showNavSecond, setShowNavSecond] = useState(false);
 
   return (
-    <MDBNavbar  fixed='top' expand='lg 'light bgColor='light'>
-      <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Quams  </MDBNavbarBrand>
+    <div >
+    <MDBNavbar  expand='lg 'light bgColor='light'>
+      <MDBContainer className='text-center'  >
+      <MDBNavbarBrand href='#'>
+            <img 
+              src={logo}
+              height='60'
+              alt=''
+              loading='lazy'
+          
+            />
+            
+          </MDBNavbarBrand>
+        
         <MDBNavbarToggler
           aria-expanded='false'
           aria-label='Toggle navigation'
@@ -30,17 +42,37 @@ import LeaderBoard from './components/LeaderBoard/leaderboard';
         >
           <MDBIcon icon='bars' fas />
         </MDBNavbarToggler>
+        {/* <h4 className='content-justti'>Quanms</h4> */}
         <MDBCollapse navbar show={showNavSecond}>
           <MDBNavbarNav style={{  justifyContent: "right",}}>
+      
             <MDBNavbarItem>
-            <MDBNavbarLink href ='/leaderboard'>LeaderBoard</MDBNavbarLink></MDBNavbarItem>
-            <MDBNavbarLink href='/register'>Sign</MDBNavbarLink>
+           
+            <MDBNavbarLink href ='/'>
+              Home</MDBNavbarLink>
+              
+           </MDBNavbarItem>
+           <MDBNavbarItem>
+           
+            <MDBNavbarLink href ='/login'>
+              Login</MDBNavbarLink>
+              
+           </MDBNavbarItem>
+           <MDBNavbarItem>
+           
+            <MDBNavbarLink href ='/'>
+              Logout</MDBNavbarLink>
+              
+           </MDBNavbarItem>
+           
             
            
           </MDBNavbarNav>
+         
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
+    </div>
   );
 }
 export default Navbar;
